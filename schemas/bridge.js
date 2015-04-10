@@ -10,9 +10,15 @@ var bridge = new Schema({
     location : String,
     lastUpdated : String,
     canCommercialFlow : String,
+    correctionsCanCommercialFlow : { type: Array },
     usCommercialFlow : String,
+    correctionsUsCommercialFlow : { type: Array },
     canTravellersFlow : String,
-    usTravellersFlow : String
-}, { capped: 10000000000 });
+    correctionsCanTravellersFlow : { type: Array },
+    usTravellersFlow : String,
+    correctionsUsTravellersFlow : { type: Array },
+    update: { type: Date, default: Date.now },
+    likes : Number
+});
 
 module.exports = mongoose.model('Bridge', bridge);

@@ -58,7 +58,7 @@ app.use(function(err, req, res, next) {
     });
 });
 
-new cronJob('*/10 * * * * *', function() {
+new cronJob('0 */15 * * * *', function() {
     request.get('http://www.cbsa-asfc.gc.ca/bwt-taf/bwt-eng.csv', function (error, response, body) {
         if (!error && response.statusCode == 200) {
             var csv = body.toString();
