@@ -27,6 +27,15 @@ router.get('/bridges/:id', function(req, res) {
     });
 });
 
+router.get('/bridges/name/:name', function(req, res) {
+    Bridge.findOne({'customsOffice' : req.params.name}, {}, {sort: {'update' : -1}}, function(err, object) {
+        if(err)
+            res.send(err);
+
+        res.json(object);
+    });
+});
+
 router.post('/correct', function(req, res) {
     console.log(req.body.ObjectId);
     console.log(req.body.minutes);
@@ -40,7 +49,7 @@ router.post('/correct', function(req, res) {
                 if (err)
                     res.send(err);
 
-                res.status(200);
+                res.status(200).json({"status":"success"});
             }
         );
     }
@@ -52,6 +61,8 @@ router.post('/correct', function(req, res) {
             function (err) {
                 if (err)
                     res.send(err);
+
+                res.status(200).json({"status":"success"});
             }
         );
     }
@@ -63,6 +74,8 @@ router.post('/correct', function(req, res) {
             function (err) {
                 if (err)
                     res.send(err);
+
+                res.status(200).json({"status":"success"});
             }
         );
     }
@@ -74,6 +87,8 @@ router.post('/correct', function(req, res) {
             function (err) {
                 if (err)
                     res.send(err);
+
+                res.status(200).json({"status":"success"});
             }
         );
     }
