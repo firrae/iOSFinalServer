@@ -18,6 +18,15 @@ router.get('/bridges', function(req, res, next) {
         });
 });
 
+router.get('/bridges/:id', function(req, res) {
+    Bridge.findById(req.params.id, function(err, object) {
+        if(err)
+            res.send(err);
+
+        res.status(200).json(object);
+    });
+});
+
 router.post('/correct', function(req, res) {
     console.log(req.body.ObjectId);
     console.log(req.body.minutes);
@@ -30,6 +39,8 @@ router.post('/correct', function(req, res) {
             function (err) {
                 if (err)
                     res.send(err);
+
+                res.status(200);
             }
         );
     }
