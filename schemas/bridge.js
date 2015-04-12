@@ -17,8 +17,8 @@ var bridge = new Schema({
     correctionsCanTravellersFlow : { type: Array },
     usTravellersFlow : String,
     correctionsUsTravellersFlow : { type: Array },
-    update: { type: Date, default: Date.now },
-    likes : Number
+    update: { type: Date, expires: 18000, default: Date.now },
+    likes : { type: Number, default: 0 }
 });
 
 module.exports = mongoose.model('Bridge', bridge);

@@ -24,6 +24,12 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+});
+
 app.use('/', routes);
 app.use('/users', users);
 
@@ -58,7 +64,7 @@ app.use(function(err, req, res, next) {
     });
 });
 
-new cronJob('0 */15 * * * *', function() {
+new cronJob('0 0 */1 * * *', function() {
     request.get('http://www.cbsa-asfc.gc.ca/bwt-taf/bwt-eng.csv', function (error, response, body) {
         if (!error && response.statusCode == 200) {
             var csv = body.toString();
@@ -85,6 +91,6 @@ new cronJob('0 */15 * * * *', function() {
             }
         }
     });
-}, null, true, "America/Los_Angeles");
+}, null, true, "America/New_York");
 
 module.exports = app;
